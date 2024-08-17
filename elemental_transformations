@@ -1,0 +1,44 @@
+import time
+
+def place_columns(matrix, start, end):
+    for row in matrix:
+        row[start], row[end] = row[end], row[start]
+
+def place_lines(matrix, start, end):
+    matrix[start], matrix[end] = matrix[end], matrix[start]
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(map(str, row)))
+
+def main():
+    n, m, c = map(int, input().split())
+    
+    matrix = [
+        list(map(int, input().split()))
+        for _ in range(n)
+    ]
+
+    for _ in range(c):
+        command, start, end = input().split()
+        start, end = int(start), int(end)
+
+        if command == "C":
+            place_columns(matrix, start, end)
+        elif command == "L":
+            place_lines(matrix, start, end)
+        else:
+            raise ValueError("Comando inválido. Use 'C' para colunas ou 'L' para linhas.")
+
+    print("Matriz resultante:")
+    print_matrix(matrix)
+
+if __name__ == "__main__":
+    start_time = time.time()
+    
+    main()
+    
+    end_time = time.time()
+    print(f"Tempo de execução: {end_time - start_time:.6f} segundos")
+    
+    
